@@ -5,8 +5,10 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from 'yup';
 
+const servicos = ["Banho", "Tosa Completa", "Tosa Higiênica", "Consulta Veterinária, Hotel Pet, Daycare (Creche), Adestramento, Transporte do Pet"]
+
 const schema = yup.object().shape({
-    nome: yup.string().required('Nome do serviço é obrigatório'),
+    nome: yup.string().required('Nome do serviço é obrigatório').oneOf(servicos, "Selecione um serviço válido."),
     data: yup.date().min(new Date(), 'A data não pode ser anterior ao dia atual').required('A data do serviço é obrigatória').typeError('A data deve ter um valor válido'),
     observacao: yup.string().required('Observação é obrigatória.')
 })
